@@ -1,0 +1,27 @@
+{
+  "atomTouchBar": {
+    "title": "Pixel Launcher Mod V5",
+    "buttons": [
+      {
+        "label": "All",
+        "script": "./build.sh;./sign.sh./install.sh"
+      },
+      {
+        "label": "Build",
+        "script": "./build.sh"
+      },
+      {
+        "label": "Sign",
+        "script": "./sign.sh"
+      },
+      {
+        "label": "Install",
+        "script": "./install.sh"
+      },
+      {
+        "label": "Decompile",
+        "script": "jadx-gui dist/PixelLauncherModV5.apk"
+      }
+    ]
+  }
+}

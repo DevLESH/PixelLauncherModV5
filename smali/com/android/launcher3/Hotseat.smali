@@ -1,0 +1,388 @@
+.class public Lcom/android/launcher3/Hotseat;
+.super Landroid/widget/FrameLayout;
+.source "SourceFile"
+
+# interfaces
+.implements Lcom/android/launcher3/Insettable;
+.implements Lcom/android/launcher3/logging/UserEventDispatcher$LogContainerProvider;
+
+
+# instance fields
+.field public mContent:Lcom/android/launcher3/CellLayout;
+
+.field mHasVerticalHotseat:Z
+
+.field private final mLauncher:Lcom/android/launcher3/Launcher;
+
+
+# direct methods
+.method public constructor <init>(Landroid/content/Context;)V
+    .locals 1
+
+    .line 50
+    const/4 v0, 0x0
+
+    invoke-direct {p0, p1, v0}, Lcom/android/launcher3/Hotseat;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;)V
+
+    .line 51
+    return-void
+.end method
+
+.method public constructor <init>(Landroid/content/Context;Landroid/util/AttributeSet;)V
+    .locals 1
+
+    .line 54
+    const/4 v0, 0x0
+
+    invoke-direct {p0, p1, p2, v0}, Lcom/android/launcher3/Hotseat;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V
+
+    .line 55
+    return-void
+.end method
+
+.method public constructor <init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V
+    .locals 0
+
+    .line 58
+    invoke-direct {p0, p1, p2, p3}, Landroid/widget/FrameLayout;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V
+
+    .line 59
+    invoke-static {p1}, Lcom/android/launcher3/Launcher;->getLauncher(Landroid/content/Context;)Lcom/android/launcher3/Launcher;
+
+    move-result-object p1
+
+    iput-object p1, p0, Lcom/android/launcher3/Hotseat;->mLauncher:Lcom/android/launcher3/Launcher;
+
+    .line 60
+    return-void
+.end method
+
+
+# virtual methods
+.method public final fillInLogContainerData(Landroid/view/View;Lcom/android/launcher3/ItemInfo;Lcom/android/launcher3/userevent/nano/LauncherLogProto$Target;Lcom/android/launcher3/userevent/nano/LauncherLogProto$Target;)V
+    .locals 0
+
+    .line 150
+    iget p1, p2, Lcom/android/launcher3/ItemInfo;->cellX:I
+
+    iput p1, p3, Lcom/android/launcher3/userevent/nano/LauncherLogProto$Target;->gridX:I
+
+    .line 151
+    iget p1, p2, Lcom/android/launcher3/ItemInfo;->cellY:I
+
+    iput p1, p3, Lcom/android/launcher3/userevent/nano/LauncherLogProto$Target;->gridY:I
+
+    .line 152
+    const/4 p1, 0x2
+
+    iput p1, p4, Lcom/android/launcher3/userevent/nano/LauncherLogProto$Target;->containerType:I
+
+    .line 153
+    return-void
+.end method
+
+.method protected onFinishInflate()V
+    .locals 1
+
+    .line 90
+    invoke-super {p0}, Landroid/widget/FrameLayout;->onFinishInflate()V
+
+    .line 91
+    const v0, 0x7f0e0044
+
+    invoke-virtual {p0, v0}, Lcom/android/launcher3/Hotseat;->findViewById(I)Landroid/view/View;
+
+    move-result-object v0
+
+    check-cast v0, Lcom/android/launcher3/CellLayout;
+
+    iput-object v0, p0, Lcom/android/launcher3/Hotseat;->mContent:Lcom/android/launcher3/CellLayout;
+
+    .line 93
+    iget-object v0, p0, Lcom/android/launcher3/Hotseat;->mContent:Lcom/android/launcher3/CellLayout;
+
+    invoke-virtual {v0}, Lcom/android/launcher3/CellLayout;->removeAllViewsInLayout()V
+
+    .line 94
+    return-void
+.end method
+
+.method public onInterceptTouchEvent(Landroid/view/MotionEvent;)Z
+    .locals 0
+
+    .line 144
+    iget-object p1, p0, Lcom/android/launcher3/Hotseat;->mLauncher:Lcom/android/launcher3/Launcher;
+
+    iget-object p1, p1, Lcom/android/launcher3/Launcher;->mWorkspace:Lcom/android/launcher3/Workspace;
+
+    invoke-virtual {p1}, Lcom/android/launcher3/Workspace;->workspaceIconsCanBeDragged()Z
+
+    move-result p1
+
+    if-nez p1, :cond_0
+
+    iget-object p1, p0, Lcom/android/launcher3/Hotseat;->mLauncher:Lcom/android/launcher3/Launcher;
+
+    .line 145
+    iget-object p1, p1, Lcom/android/launcher3/Launcher;->mAccessibilityDelegate:Lcom/android/launcher3/accessibility/LauncherAccessibilityDelegate;
+
+    invoke-virtual {p1}, Lcom/android/launcher3/accessibility/LauncherAccessibilityDelegate;->isInAccessibleDrag()Z
+
+    move-result p1
+
+    if-nez p1, :cond_0
+
+    const/4 p1, 0x1
+
+    return p1
+
+    :cond_0
+    const/4 p1, 0x0
+
+    .line 144
+    return p1
+.end method
+
+.method public final setInsets(Landroid/graphics/Rect;)V
+    .locals 8
+
+    .line 157
+    invoke-virtual {p0}, Lcom/android/launcher3/Hotseat;->getLayoutParams()Landroid/view/ViewGroup$LayoutParams;
+
+    move-result-object v0
+
+    check-cast v0, Landroid/widget/FrameLayout$LayoutParams;
+
+    .line 158
+    iget-object v1, p0, Lcom/android/launcher3/Hotseat;->mLauncher:Lcom/android/launcher3/Launcher;
+
+    iget-object v1, v1, Lcom/android/launcher3/BaseActivity;->mDeviceProfile:Lcom/android/launcher3/DeviceProfile;
+
+    .line 159
+    iget-object v2, p0, Lcom/android/launcher3/Hotseat;->mLauncher:Lcom/android/launcher3/Launcher;
+
+    iget-object v2, v2, Lcom/android/launcher3/BaseActivity;->mDeviceProfile:Lcom/android/launcher3/DeviceProfile;
+
+    invoke-virtual {v2}, Lcom/android/launcher3/DeviceProfile;->isVerticalBarLayout()Z
+
+    move-result v2
+
+    iput-boolean v2, p0, Lcom/android/launcher3/Hotseat;->mHasVerticalHotseat:Z
+
+    .line 161
+    iget-boolean v2, p0, Lcom/android/launcher3/Hotseat;->mHasVerticalHotseat:Z
+
+    const/4 v3, -0x1
+
+    const/4 v4, 0x1
+
+    if-eqz v2, :cond_1
+
+    .line 162
+    iget-object v2, p0, Lcom/android/launcher3/Hotseat;->mContent:Lcom/android/launcher3/CellLayout;
+
+    iget-object v5, v1, Lcom/android/launcher3/DeviceProfile;->inv:Lcom/android/launcher3/InvariantDeviceProfile;
+
+    iget v5, v5, Lcom/android/launcher3/InvariantDeviceProfile;->numHotseatIcons:I
+
+    invoke-virtual {v2, v4, v5}, Lcom/android/launcher3/CellLayout;->setGridSize(II)V
+
+    .line 164
+    iput v3, v0, Landroid/widget/FrameLayout$LayoutParams;->height:I
+
+    .line 165
+    invoke-virtual {v1}, Lcom/android/launcher3/DeviceProfile;->isSeascape()Z
+
+    move-result v2
+
+    if-eqz v2, :cond_0
+
+    .line 166
+    const/4 v2, 0x3
+
+    iput v2, v0, Landroid/widget/FrameLayout$LayoutParams;->gravity:I
+
+    .line 167
+    iget v2, v1, Lcom/android/launcher3/DeviceProfile;->hotseatBarSizePx:I
+
+    iget v3, p1, Landroid/graphics/Rect;->left:I
+
+    add-int/2addr v2, v3
+
+    iget v3, v1, Lcom/android/launcher3/DeviceProfile;->hotseatBarSidePaddingPx:I
+
+    add-int/2addr v2, v3
+
+    iput v2, v0, Landroid/widget/FrameLayout$LayoutParams;->width:I
+
+    .line 168
+    iget-object v2, p0, Lcom/android/launcher3/Hotseat;->mContent:Lcom/android/launcher3/CellLayout;
+
+    iget v3, p1, Landroid/graphics/Rect;->left:I
+
+    iget v4, p1, Landroid/graphics/Rect;->top:I
+
+    iget v1, v1, Lcom/android/launcher3/DeviceProfile;->hotseatBarSidePaddingPx:I
+
+    iget v5, p1, Landroid/graphics/Rect;->bottom:I
+
+    invoke-virtual {v2, v3, v4, v1, v5}, Lcom/android/launcher3/CellLayout;->setPadding(IIII)V
+
+    goto :goto_0
+
+    .line 172
+    :cond_0
+    const/4 v2, 0x5
+
+    iput v2, v0, Landroid/widget/FrameLayout$LayoutParams;->gravity:I
+
+    .line 173
+    iget v2, v1, Lcom/android/launcher3/DeviceProfile;->hotseatBarSizePx:I
+
+    iget v3, p1, Landroid/graphics/Rect;->right:I
+
+    add-int/2addr v2, v3
+
+    iget v3, v1, Lcom/android/launcher3/DeviceProfile;->hotseatBarSidePaddingPx:I
+
+    add-int/2addr v2, v3
+
+    iput v2, v0, Landroid/widget/FrameLayout$LayoutParams;->width:I
+
+    .line 174
+    iget-object v2, p0, Lcom/android/launcher3/Hotseat;->mContent:Lcom/android/launcher3/CellLayout;
+
+    iget v1, v1, Lcom/android/launcher3/DeviceProfile;->hotseatBarSidePaddingPx:I
+
+    iget v3, p1, Landroid/graphics/Rect;->top:I
+
+    iget v4, p1, Landroid/graphics/Rect;->right:I
+
+    iget v5, p1, Landroid/graphics/Rect;->bottom:I
+
+    invoke-virtual {v2, v1, v3, v4, v5}, Lcom/android/launcher3/CellLayout;->setPadding(IIII)V
+
+    goto :goto_0
+
+    .line 178
+    :cond_1
+    iget-object v2, p0, Lcom/android/launcher3/Hotseat;->mContent:Lcom/android/launcher3/CellLayout;
+
+    iget-object v5, v1, Lcom/android/launcher3/DeviceProfile;->inv:Lcom/android/launcher3/InvariantDeviceProfile;
+
+    iget v5, v5, Lcom/android/launcher3/InvariantDeviceProfile;->numHotseatIcons:I
+
+    invoke-virtual {v2, v5, v4}, Lcom/android/launcher3/CellLayout;->setGridSize(II)V
+
+    .line 180
+    const/16 v2, 0x50
+
+    iput v2, v0, Landroid/widget/FrameLayout$LayoutParams;->gravity:I
+
+    .line 181
+    iput v3, v0, Landroid/widget/FrameLayout$LayoutParams;->width:I
+
+    .line 182
+    iget v2, v1, Lcom/android/launcher3/DeviceProfile;->hotseatBarSizePx:I
+
+    iget v3, p1, Landroid/graphics/Rect;->bottom:I
+
+    add-int/2addr v2, v3
+
+    iput v2, v0, Landroid/widget/FrameLayout$LayoutParams;->height:I
+
+    .line 188
+    iget v2, v1, Lcom/android/launcher3/DeviceProfile;->widthPx:I
+
+    int-to-float v2, v2
+
+    iget-object v3, v1, Lcom/android/launcher3/DeviceProfile;->inv:Lcom/android/launcher3/InvariantDeviceProfile;
+
+    iget v3, v3, Lcom/android/launcher3/InvariantDeviceProfile;->numColumns:I
+
+    int-to-float v3, v3
+
+    div-float/2addr v2, v3
+
+    .line 189
+    iget v3, v1, Lcom/android/launcher3/DeviceProfile;->widthPx:I
+
+    int-to-float v3, v3
+
+    iget-object v4, v1, Lcom/android/launcher3/DeviceProfile;->inv:Lcom/android/launcher3/InvariantDeviceProfile;
+
+    iget v4, v4, Lcom/android/launcher3/InvariantDeviceProfile;->numHotseatIcons:I
+
+    int-to-float v4, v4
+
+    div-float/2addr v3, v4
+
+    .line 190
+    sub-float/2addr v2, v3
+
+    const/high16 v3, 0x40000000    # 2.0f
+
+    div-float/2addr v2, v3
+
+    invoke-static {v2}, Ljava/lang/Math;->round(F)I
+
+    move-result v2
+
+    .line 191
+    iget-object v3, v1, Lcom/android/launcher3/DeviceProfile;->workspacePadding:Landroid/graphics/Rect;
+
+    .line 193
+    iget-object v4, p0, Lcom/android/launcher3/Hotseat;->mContent:Lcom/android/launcher3/CellLayout;
+
+    iget v5, v3, Landroid/graphics/Rect;->left:I
+
+    add-int/2addr v5, v2
+
+    iget v6, v1, Lcom/android/launcher3/DeviceProfile;->cellLayoutPaddingLeftRightPx:I
+
+    add-int/2addr v5, v6
+
+    iget v6, v1, Lcom/android/launcher3/DeviceProfile;->hotseatBarTopPaddingPx:I
+
+    iget v3, v3, Landroid/graphics/Rect;->right:I
+
+    add-int/2addr v2, v3
+
+    iget v3, v1, Lcom/android/launcher3/DeviceProfile;->cellLayoutPaddingLeftRightPx:I
+
+    add-int/2addr v2, v3
+
+    iget v3, v1, Lcom/android/launcher3/DeviceProfile;->hotseatBarBottomPaddingPx:I
+
+    iget v7, p1, Landroid/graphics/Rect;->bottom:I
+
+    add-int/2addr v3, v7
+
+    iget v1, v1, Lcom/android/launcher3/DeviceProfile;->cellLayoutBottomPaddingPx:I
+
+    add-int/2addr v3, v1
+
+    invoke-virtual {v4, v5, v6, v2, v3}, Lcom/android/launcher3/CellLayout;->setPadding(IIII)V
+
+    .line 199
+    :goto_0
+    invoke-virtual {p0, v0}, Lcom/android/launcher3/Hotseat;->setLayoutParams(Landroid/view/ViewGroup$LayoutParams;)V
+
+    .line 200
+    invoke-static {p0, p1}, Lcom/android/launcher3/InsettableFrameLayout;->dispatchInsets(Landroid/view/ViewGroup;Landroid/graphics/Rect;)V
+
+    .line 201
+    return-void
+.end method
+
+.method public setOnLongClickListener(Landroid/view/View$OnLongClickListener;)V
+    .locals 1
+
+    .line 71
+    iget-object v0, p0, Lcom/android/launcher3/Hotseat;->mContent:Lcom/android/launcher3/CellLayout;
+
+    invoke-virtual {v0, p1}, Lcom/android/launcher3/CellLayout;->setOnLongClickListener(Landroid/view/View$OnLongClickListener;)V
+
+    .line 72
+    return-void
+.end method
