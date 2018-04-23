@@ -1,0 +1,41 @@
+if: tag IS blank
+env:
+  global:
+  - TERM=dumb
+  - secure: fM9zWlJuSzKWuP+aCiOBO3RkSqxSGT2fdt20AuyS/ggYY6rd6TMu0S1WLcQuqkJ/DAM5l2IddualmD5EApZ9gXE+sv4h1F/1zruQpX4ZgYMOUwoMkJ6k4+SXRwTYzdPY1Y9bQbjqJmdrEx4Ez49tE4gskAtpD3scPGSptaSzY6ccBPerF/9uubGwK++Bg0T1Ijb1+/cVXRVG+L6o7wPOt4HPHmQGCcuTrruIjYl9cLrCgQ5aYHDcZKIee0qCPdk7/9D4r51ALcnaSxTUHvMDdRWQn/KjvL23psW3ckRISOlp4Zx4gnuC5+jRU7Lvn3iuCQIoTjua0aSUgk2Fmo6CQhIuFnPCCwjOovOurKOG8CYOce5e0hlCk1hNt2PEGDEZpP079DJ72JfhlJwz231sPlcRY3A2iaIJ0s2YEXphfEnueN4uUsW6i1QUzVUzXSF1YW64maFTmYwpiRE3+gSf5jKi6FenQm13dvRma+IWQHBj2sQ0FIhLHOxNSD/Ds5GBzJtMBszzeTIeqh3vOaLQgafMxM7yILtj/f3MIvE657Q3b8iYDbvRCjTdjSdiqvyGkp0mQUH0UX8N7yRLbrJSxgqzzRWox+HouL/d8P/h/M03Kz6of6ErabTSDETQjfuToAyeGik+7cN2XQlrS5dqKFJm6slzcxW5EzU5V0ZrvkQ=
+  - secure: f6J4Pfplh4BQHuTzDSnpUGNeKYJHDYHBjilF94wGsN8TGyKdlKCOlNm0oyiIPLyBHSljuIhm1L449E3Ilp0tqr/ZABPfzd3hcnHS2FOgQfcMX8G7E4m8eLNLwvPR/Oofqly7ez8nqWS/YDz4qznDFGcbzncZL7XM8q0U1q3yxdrw2fFfYyKHFHR+qgPBBtl1BliK8KbefC/5oj+v0JyflUfIZZno4snvqMz1QLOrTLl3cnswVZxYSiLOPnJTlB1JZAIQPip/1CaogHU/3iF0II6gr0hApZEIAZkrDimxUBRKOWvU/JQd/8fBdXUB9mtvKetxemjFmlkm1D6K84Iq+IKD1sqlp9JMh8cpASsUrlSrKNmVkYgvVvlSuBMknufyPhIknlxdSLZI7RK6j7z4gJqWJPdp4aFgxFhak0L48bjtJnsqDt8CDLzdVuw0DPy53tG9ckemK8QqNgAmNBQh9Ef+ngGwP9GDGHjCGBxZOYOgBoDFWgdKnyPhR6t7FOwPKR5EH66oEtgeuDK0TOMnP39dBMl70AvSTFDIm8hoAN91oOVjEUF06+syCCBZBH0ogxNVwuiSvtI/tDqa9EmDdsSmUCQ1NLU0AEdc/8L6ipOAEJXANhssDLDrJixlWA6eQi1QWFuZCxu5fdrO2xFwUQt9MmPY2CRwfgzQtra3l2s=
+language: java
+before_install:
+- openssl aes-256-cbc -K $encrypted_e968b358a4ee_key -iv $encrypted_e968b358a4ee_iv
+  -in mpl.jks.enc -out mpl.jks -d
+before_script:
+- export APK_NAME="Pixel 2 Launcher modded 5.3 build ${TRAVIS_BUILD_NUMBER}.apk"
+- ./tools/yq_linux_386 w -i apktool.yml versionInfo.versionName "P-4623511 modded
+  5.3 build ${TRAVIS_BUILD_NUMBER}"
+- bash tools/changelog.sh > changelog.txt
+script:
+- bash ./build.sh
+- bash ./sign.sh
+before_deploy:
+- git config --local user.name "paphonb"
+- git config --local user.email "paphonb@gmail.com"
+- git tag "5.3_${TRAVIS_BUILD_NUMBER}" --force
+branches:
+  only:
+  - master
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: tools/telegram.sh
+  on:
+    branch: master
+- provider: releases
+  api_key:
+    secure: QdX29QFn8lb6NBaxVH8nybeYikK+8GO1I7MVcgeBIWKwtcx/4/IoPAP7D83GfkSk6+VQJ6K35Pjn/E6xZb/O18aTtGZCB9bTpY18AJmeLmeawWEdHJr4/IISD09WO1YX90Te1/HirqMpZFI0HkRMtR6oZDxUST8bW+hU0dKGcWdXPMuc1VSEzBjsaFbit0JTQlOSH3AS9bavNdqbMpIZGEK2EjI1pzfLldV7s8CM0lYPamy+TknCO04kITLwQK8AfnpbmikEgjyhYFzxmd/az63YfTudLRbiK6rJyE0oif+6Qoe/JfiYcXmecx/krR7D1mkPIrvOCrjKTOMKPX9Psr3k4AscbZ/h07tLhI+BmiHVwy13zQywhJ9i0bh+OsteTK8aOXx0uL/tMAR6w8EIZhSyvc6zzu7dWGsq4gTP8A3gwMfvwrUh4sWDwYo7mzmNiKQTOuSHxj2NHhVT0o89fSu/WYi1lXGdStrGXNNQccUJT7ttGVqBaFsr65W/tlhhn/AwAP1KzPv0Pm+/Y1qeMopv/o+QTR1aoHXk+lFuf4u2uYyvMgKiTCfJKb5QCyJ3joALKFQkXb/llILe1BwrMwGcznEOL1MszfK6cEJBjYD8J3iSvm2GWHC9SAbzG3UPOgCCfcTWtmpQMeE56JYv/Yww3Mc7+ZScGiCC1bxLMzc=
+  file: $APK_NAME
+  on:
+    repo: paphonb/PixelLauncherModV5
+    branch: master
+branches:
+  only:
+  - master
