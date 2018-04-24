@@ -180,6 +180,5 @@
     <string name="smartspace_preferences_in_settings_desc">At the top of your Home screen</string>
     <string name="hint_qsb">Search apps &amp; more</string>
     <string name="hotseat_hint_qsb">Search apps, web, &amp; more…</string>
-    <string name="dark_theme_summary">Enable the built-in dark theme</string>
-    <string name="dark_text_theme_summary">Use dark text to increase visibility on light wallpapers</string>
+    <string name="default_theme">1</string>
 </resources>

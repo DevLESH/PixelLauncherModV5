@@ -16,4 +16,14 @@
         <item>@string/icon_shape_circle</item>
         <item>@string/icon_shape_teardrop</item>
     </string-array>
+    <string-array name="theme_entries">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>Dark text</item>
+    </string-array>
+    <string-array name="theme_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 </resources>

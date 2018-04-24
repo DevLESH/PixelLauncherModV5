@@ -1980,46 +1980,37 @@
     return v0
 .end method
 
-.method public static isDarkTextThemeEnabled(Landroid/content/Context;)Z
-    .locals 3
+.method public static getTheme(Landroid/content/Context;)Ljava/lang/String;
+  .locals 4
 
-    .prologue
-    .line 133
-    invoke-static {p0}, Lcom/android/launcher3/Utilities;->getPrefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
+  .prologue
+  .line 133
+  invoke-static {p0}, Lcom/android/launcher3/Utilities;->getPrefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
-    move-result-object v0
+  move-result-object v0
 
-    const-string/jumbo v1, "pref_darkTextTheme"
+  const-string/jumbo v1, "pref_theme"
 
-    const v2, 0x0
+  sget-boolean v3, Lcom/android/launcher3/Utilities;->ATLEAST_OREO_MR1:Z
 
-    .line 133
-    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+  if-eqz v3, :before_o_mr1
 
-    move-result v0
+  const-string/jumbo v2, "0"
 
-    return v0
-.end method
+  :resume
 
-.method public static isDarkThemeEnabled(Landroid/content/Context;)Z
-    .locals 3
+  .line 133
+  invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
-    .prologue
-    .line 133
-    invoke-static {p0}, Lcom/android/launcher3/Utilities;->getPrefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
+  move-result-object v0
 
-    move-result-object v0
+  return-object v0
 
-    const-string/jumbo v1, "pref_darkTheme"
+  :before_o_mr1
 
-    const v2, 0x0
+  const-string/jumbo v2, "1"
 
-    .line 133
-    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
-
-    move-result v0
-
-    return v0
+  goto :resume
 .end method
 
 .method public static isForceRoundIcon(Landroid/content/Context;)Z

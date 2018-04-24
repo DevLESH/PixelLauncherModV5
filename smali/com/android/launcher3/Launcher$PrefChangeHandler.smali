@@ -39,15 +39,7 @@
 
     .prologue
     .line 4105
-    const-string/jumbo v0, "pref_darkTheme"
-
-    invoke-virtual {v0, p2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v0
-
-    if-nez v0, :cond_1
-
-    const-string/jumbo v0, "pref_darkTextTheme"
+    const-string/jumbo v0, "pref_theme"
 
     invoke-virtual {v0, p2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 

@@ -834,7 +834,6 @@
     <public type="bool" name="allow_rotation" id="0x7f0f0005" />
     <public type="bool" name="hotseat_transpose_layout_with_orientation" id="0x7f0f0006" />
     <public type="bool" name="is_atleast_o" id="0x7f0f0007" />
-    <public type="bool" name="customThemeEnabled" id="0x7f0f0008" />
     <public type="array" name="icon_shape_override_paths_values" id="0x7f100000" />
     <public type="array" name="icon_shape_override_paths_names" id="0x7f100001" />
     <public type="fraction" name="container_margin" id="0x7f110000" />

@@ -31,51 +31,40 @@
     .locals 5
 
     .prologue
-    invoke-static {p0}, Lcom/android/launcher3/Utilities;->isDarkThemeEnabled(Landroid/content/Context;)Z
+    invoke-static {p0}, Lcom/android/launcher3/Utilities;->getTheme(Landroid/content/Context;)Ljava/lang/String;
 
-    move-result p1
+    move-result-object v0
 
-    invoke-static {p0}, Lcom/android/launcher3/Utilities;->isDarkTextThemeEnabled(Landroid/content/Context;)Z
+    const-string/jumbo v1, "1"
 
-    move-result p2
+    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    const/4 v0, 0x0
+    move-result v1
 
-    .line 40
-    const v2, 0x18
+    if-nez v1, :lightTheme
 
-    .line 41
-    invoke-virtual {p0}, Lcom/google/android/apps/nexuslauncher/NexusLauncherActivity;->getResources()Landroid/content/res/Resources;
+    const-string/jumbo v1, "2"
 
-    move-result-object v1
+    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    invoke-virtual {v1}, Landroid/content/res/Resources;->getConfiguration()Landroid/content/res/Configuration;
+    move-result v1
 
-    move-result-object v1
+    if-nez v1, :darkTheme
 
-    iget v1, v1, Landroid/content/res/Configuration;->orientation:I
+    const-string/jumbo v1, "3"
 
-    .line 42
-    const/4 v3, 0x2
+    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    .line 41
-    if-ne v1, v3, :cond_2
+    move-result v1
 
-    .line 43
-    const/16 v1, 0x10
+    if-nez v1, :darkTextTheme
+
+    :resume
 
     .line 45
     :goto_0
-    and-int/2addr v1, v2
-
-    if-eqz v1, :cond_1
-
-    const/4 v0, 0x1
 
     .line 46
-    :cond_1
-    if-eqz v0, :cond_3
-
     if-eqz p1, :cond_3
 
     .line 47
@@ -87,16 +76,8 @@
     :goto_1
     return-void
 
-    .line 44
-    :cond_2
-    const/16 v1, 0x8
-
-    goto :goto_0
-
     .line 48
     :cond_3
-    if-eqz v0, :cond_4
-
     if-eqz p2, :cond_4
 
     .line 49
@@ -108,8 +89,6 @@
 
     .line 50
     :cond_4
-    if-eqz v0, :cond_5
-
     .line 51
     const v0, 0x7f130011
 
@@ -117,9 +96,27 @@
 
     goto :goto_1
 
-    .line 53
-    :cond_5
-    invoke-super {p0, p1, p2}, Lcom/android/launcher3/Launcher;->overrideTheme(ZZ)V
+    :lightTheme
 
-    goto :goto_1
+    const p1, 0x0
+
+    const p2, 0x0
+
+    goto :resume
+
+    :darkTheme
+
+    const p1, 0x1
+
+    const p2, 0x0
+
+    goto :resume
+
+    :darkTextTheme
+
+    const p1, 0x0
+
+    const p2, 0x1
+
+    goto :resume
 .end method

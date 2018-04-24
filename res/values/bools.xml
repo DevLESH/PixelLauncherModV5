@@ -8,5 +8,4 @@
     <bool name="allow_rotation">false</bool>
     <bool name="hotseat_transpose_layout_with_orientation">true</bool>
     <bool name="is_atleast_o">false</bool>
-    <bool name="customThemeEnabled">true</bool>
 </resources>
