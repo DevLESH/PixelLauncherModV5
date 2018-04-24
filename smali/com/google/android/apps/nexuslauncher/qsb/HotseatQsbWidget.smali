@@ -665,6 +665,8 @@
     :goto_2
     invoke-virtual {p0, v0}, Lcom/google/android/apps/nexuslauncher/qsb/HotseatQsbWidget;->ar(I)V
 
+    invoke-virtual {p0, v0}, Lcom/google/android/apps/nexuslauncher/qsb/HotseatQsbWidget;->as(I)V
+
     .line 147
     iget v0, p0, Lcom/google/android/apps/nexuslauncher/qsb/HotseatQsbWidget;->sO:I
 
@@ -680,7 +682,7 @@
 
     move-result v0
 
-    invoke-virtual {p0, v0}, Lcom/google/android/apps/nexuslauncher/qsb/HotseatQsbWidget;->as(I)V
+    # invoke-virtual {p0, v0}, Lcom/google/android/apps/nexuslauncher/qsb/HotseatQsbWidget;->as(I)V
 
     .line 149
     iget-object v0, p0, Lcom/google/android/apps/nexuslauncher/qsb/HotseatQsbWidget;->sZ:Lcom/google/android/apps/nexuslauncher/qsb/k;
