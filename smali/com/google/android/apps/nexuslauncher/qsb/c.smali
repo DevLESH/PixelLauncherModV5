@@ -56,6 +56,12 @@
 
     add-float/2addr v0, p2
 
+    invoke-static {v0}, Ljava/lang/Math;->round(F)I
+
+    move-result v0
+
+    int-to-float v0, v0
+
     invoke-virtual {p1, v0}, Lcom/google/android/apps/nexuslauncher/qsb/AllAppsQsbLayout;->setTranslationY(F)V
 
     return-void

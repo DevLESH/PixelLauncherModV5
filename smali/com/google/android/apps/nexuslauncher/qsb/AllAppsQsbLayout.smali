@@ -94,6 +94,16 @@
 
     iput p1, p0, Lcom/google/android/apps/nexuslauncher/qsb/AllAppsQsbLayout;->te:F
 
+    iget p1, p0, Lcom/google/android/apps/nexuslauncher/qsb/AllAppsQsbLayout;->te:F
+
+    invoke-static {p1}, Ljava/lang/Math;->round(F)I
+
+    move-result p1
+
+    int-to-float p1, p1
+
+    invoke-virtual {p0, p1}, Lcom/google/android/apps/nexuslauncher/qsb/AllAppsQsbLayout;->setTranslationY(F)V
+
     .line 69
     new-instance p1, Landroid/support/a/C;
 
