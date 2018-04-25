@@ -1938,6 +1938,25 @@
     return v0
 .end method
 
+.method public static enableSmartSpace(Landroid/content/Context;)Z
+    .locals 3
+
+    .prologue
+    .line 133
+    invoke-static {p0}, Lcom/android/launcher3/Utilities;->disableSmartSpace(Landroid/content/Context;)Z
+
+    move-result v0
+
+    const v1, 0x0
+
+    if-nez v0, :return
+
+    const v1, 0x1
+
+    :return
+    return v1
+.end method
+
 .method public static forceColoredQsb(Landroid/content/Context;)Z
     .locals 3
 
