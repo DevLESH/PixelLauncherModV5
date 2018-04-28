@@ -10,12 +10,11 @@ before_install:
   -in mpl.jks.enc -out mpl.jks -d
 before_script:
 - export APK_NAME="Pixel 2 Launcher modded 5.3 build ${TRAVIS_BUILD_NUMBER}.apk"
+- export PIXEL_APK_NAME="Pixel 2 Launcher modded 5.3 build ${TRAVIS_BUILD_NUMBER} for Pixel.apk"
 - ./tools/yq_linux_386 w -i apktool.yml versionInfo.versionName "P-4623511 modded
   5.3 build ${TRAVIS_BUILD_NUMBER}"
-- bash tools/changelog.sh > changelog.txt
 script:
-- bash ./build.sh
-- bash ./sign.sh
+- bash ./ci.sh
 before_deploy:
 - git config --local user.name "paphonb"
 - git config --local user.email "paphonb@gmail.com"
@@ -33,7 +32,9 @@ deploy:
   skip_cleanup: true
   api_key:
     secure: QdX29QFn8lb6NBaxVH8nybeYikK+8GO1I7MVcgeBIWKwtcx/4/IoPAP7D83GfkSk6+VQJ6K35Pjn/E6xZb/O18aTtGZCB9bTpY18AJmeLmeawWEdHJr4/IISD09WO1YX90Te1/HirqMpZFI0HkRMtR6oZDxUST8bW+hU0dKGcWdXPMuc1VSEzBjsaFbit0JTQlOSH3AS9bavNdqbMpIZGEK2EjI1pzfLldV7s8CM0lYPamy+TknCO04kITLwQK8AfnpbmikEgjyhYFzxmd/az63YfTudLRbiK6rJyE0oif+6Qoe/JfiYcXmecx/krR7D1mkPIrvOCrjKTOMKPX9Psr3k4AscbZ/h07tLhI+BmiHVwy13zQywhJ9i0bh+OsteTK8aOXx0uL/tMAR6w8EIZhSyvc6zzu7dWGsq4gTP8A3gwMfvwrUh4sWDwYo7mzmNiKQTOuSHxj2NHhVT0o89fSu/WYi1lXGdStrGXNNQccUJT7ttGVqBaFsr65W/tlhhn/AwAP1KzPv0Pm+/Y1qeMopv/o+QTR1aoHXk+lFuf4u2uYyvMgKiTCfJKb5QCyJ3joALKFQkXb/llILe1BwrMwGcznEOL1MszfK6cEJBjYD8J3iSvm2GWHC9SAbzG3UPOgCCfcTWtmpQMeE56JYv/Yww3Mc7+ZScGiCC1bxLMzc=
-  file: $APK_NAME
+  file:
+    - $APK_NAME
+    - $PIXEL_APK_NAME
   on:
     repo: paphonb/PixelLauncherModV5
     branch: master
