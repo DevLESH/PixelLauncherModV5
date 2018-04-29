@@ -25,6 +25,7 @@
     .locals 0
 
     .line 116
+    :try_start_0
     iget-object p1, p0, Lcom/android/launcher3/ClickShadowView$1;->this$0:Lcom/android/launcher3/ClickShadowView;
 
     invoke-static {p1}, Lcom/android/launcher3/ClickShadowView;->access$000(Lcom/android/launcher3/ClickShadowView;)Landroid/graphics/drawable/Drawable;
@@ -33,6 +34,14 @@
 
     invoke-virtual {p1, p2}, Landroid/graphics/drawable/Drawable;->getOutline(Landroid/graphics/Outline;)V
 
+    :try_end_0
+    .catch Ljava/lang/IllegalArgumentException; {:try_start_0 .. :try_end_0} :catch_0
+
     .line 117
+    return-void
+
+    :catch_0
+    move-exception v0
+
     return-void
 .end method
